@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer</title>
+</head>
+<body>
+	<h4>Shoes</h4>
+	<table border="1">
+		<tr>
+			<th>Shoe ID</th>
+			<th>Brand</th>
+			<th>Type</th>
+			<th>Price</th>
+			<th>Amount in stock</th>
+		</tr>
+		<tr th:each="s:${shoes}">
+			<td th:text="${s.shoeId}"></td>
+			<td th:text="${s.brand}"></td>
+			<td th:text="${s.type}"></td>
+			<td th:text="${s.price}"></td>
+			<td th:text="${s.quantityInStock}"></td>
+		</tr>
+	</table>
+	</br></br>
+	
+	<h4>Place Order</h4>
+	<form action="#" th:action="@{createOrder}" method="post" th:object="${orderForm}">
+		<label>Shoe ID</label>
+		<input type="number" th:field="*{shoeId}"/></br>
+		<label>Quantity required</label>
+		<input type="number" th:field="*{quantityRequired}"/></br>
+		<label>Email</label>
+		<input readonly type="text" th:field="*{emailId}"/></br>
+		
+		
+		<input type="submit" value="Place order" name="orderSubmitButton"/>
+		<input type="reset" value="Reset"/>
+	</form>
+	<span th:text="${orderMessage}" style="color:red"></span>
+	
+	</br></br>
+	<h4>Your orders:</h4>
+	<table border="1">
+		<tr>
+			<th>Shoe ID</th>
+			<th>Quantity Required</th>
+			<th>Order Date</th>
+		</tr>
+		<tr th:each="o:${orders}">
+			<td th:text="${o.shoeId}"></td>
+			<td th:text="${o.quantityRequired}"></td>
+			<td th:text="${o.orderDateTime}"></td>
+		</tr>
+	</table>
+</body>
+</html>

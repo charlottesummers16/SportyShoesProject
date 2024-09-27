@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+</head>
+<body>
+	<h2>Sporty Shoes</h2>
+	
+	<h4>Login</h4>
+	<form action="#" th:action="@{/login}" method="post" th:object="${user}">
+		<label>Email</label>
+		<input type="text" th:field="*{emailId}"/></br>
+		<label>Password</label>
+		<input type="password" th:field="*{password}"/></br>
+		
+		<input type="submit" th:value="Login"/>
+		<input type="reset" value="Reset"/>
+		</br></br>
+		<span th:text="${message}" style="color:red"></span>
+	</form>
+	<span th:text="${loginMessage}" style="color:red"></span>
+	
+	</br>
+	
+	
+	<h4>Sign Up</h4>
+	<form action="#" th:action="@{/signUp}" method="post" th:object="${user}">
+		<label>Email</label>
+		<input type="text" th:field="*{emailId}"/></br>
+		<label>Password</label>
+		<input type="password" th:field="*{password}"/></br>
+		<label>Name</label>
+		<input type="text" th:field="*{name}"/></br>
+		
+		<input type="submit" value="Sign Up"/>
+		<input type="reset" value="Reset"/>
+		</br></br>
+		<span th:text="${message}" style="color:red"></span>
+	</form>
+	
+	<!--  -->
+	<h4>Change Password</h4>
+	<form action="#" th:action="@{/changePassword}" method="post" th:object="${userChangePassword}">
+		<label>Email</label>
+		<input type="text" th:field="*{emailId}"/></br>
+		<label>Old Password</label>
+		<input type="password" th:field="*{oldPassword}"/></br>
+		<label>New Password</label>
+		<input type="password" th:field="*{newPassword}"/></br>
+		
+		<input type="submit" value="Change Password"/>
+		<input type="reset" value="Reset"/>
+		</br></br>
+		<span th:text="${changePasswordMessage}" style="color:red"></span>
+	</form>
+
+</body>
+</html>

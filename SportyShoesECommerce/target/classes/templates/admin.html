@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+</head>
+<body>
+	
+	<h4>Add/Update Shoe</h4>
+	<form action="#" th:action="@{saveShoe}" method="post" th:object="${shoe}">
+		<label>ID</label>
+		<input type="number" th:field="*{shoeId}"/></br>
+		<label>Brand</label>
+		<input type="text" th:field="*{brand}"/></br>
+		<label>Type</label>
+		<input type="text" th:field="*{type}"/></br>
+		<label>Price</label>
+		<input type="number" th:field="*{price}"/></br>
+		<label>Quantity in stock</label>
+		<input type="number" th:field="*{quantityInStock}"/></br>
+		
+		<input type="submit" th:value="${shoeSubmitButtonName}" name="shoeSubmitButton"/>
+		<input type="reset" value="Reset"/>
+	</form>
+	</br>
+	<span th:text="${addShoeMessage}" style="color:red"></span>
+			</br></br>
+		<h4>Shoe Search</h4>
+	<form action="#" th:action="@{searchShoesByBrandAndType}" method="get">
+		<label>Brand</label>
+		<input type="text" th:value="${brand}" name="shoeBrandSearch"/></br>
+		<label>Type</label>
+		<input type="text" th:value="${type}" name="shoeTypeSearch"/></br>
+		<input type="submit" value="Search"/>
+	</form>
+			
+	<form action="#" th:action="@{admin}" method="get">
+		<input type="submit" value="View All Shoes"/>
+	</form>
+	
+	</br></br>
+	<span th:text="${shoeMessage}"></span>
+	<table border="1">
+	<tr>
+		<th>Shoe ID</th>
+		<th>Brand</th>
+		<th>Type</th>
+		<th>Price</th>
+		<th>Quantity in stock</th>
+	</tr>
+	<tr th:each="s:${shoes}">
+		<td th:text="${s.shoeId}"></td>
+		<td th:text="${s.brand}"></td>
+		<td th:text="${s.type}"></td>
+		<td th:text="${s.price}"></td>
+		<td th:text="${s.quantityInStock}"></td>
+		<td><a th:href="@{deleteShoe(shoeId=${s.shoeId})}">Delete</a></td>
+		<td><a th:href="@{updateShoeInfo(shoeId=${s.shoeId})}">Update</a></td>
+	</tr>
+</table>
+
+	</br></br>
+	<h4>Order Search</h4>
+	<form action="#" th:action="@{findOrdersByEmailId}" method="get">
+		<label>Email ID</label>
+		<input type="text" th:value="${emailId}" name="emailIdOrderSearch"/>
+ 		<input type="submit" value="Search"/>
+	</form>
+	</br>
+	
+	<form action="#" th:action="@{findOrdersByShoeId}" method="get">
+		<label>Shoe ID</label>
+		<input type="number" th:value="${shoeId}" name="shoeIdOrderSearch"/>
+ 		<input type="submit" value="Search"/>
+	</form>
+	</br>
+	
+	<form action="#" th:action="@{findOrdersByDate}" method="get">
+		<label>Start date:</label>
+		<input type="datetime-local" name="orderStart" value="2024-07-22T19:30" min="2000-01-01T00:00" max="2124-12-31T00:00" />
+		<label>Start date:</label>
+		<input type="datetime-local" name="orderEnd" value="2024-07-22T19:30" min="2000-01-01T00:00" max="2124-12-31T00:00" />
+		<input type="submit" value="Search"/>
+	</form>
+	</br>
+	<form action="#" th:action="@{admin}" method="get">
+		<input type="submit" value="View All Orders"/>
+	</form>
+	
+	
+	
+</br>
+	<span th:text="${orderMessage}"></span>
+	<table border="1">
+		<tr>
+			<th>Order ID</th>
+			<th>Email ID</th>
+			<th>Shoe ID</th>
+			<th>Quantity Required</th>
+			<th>Order Date</th>
+		</tr>
+		<tr th:each="o:${orders}">
+			<td th:text="${o.orderId}"></td>
+			<td th:text="${o.emailId}"></td>
+			<td th:text="${o.shoeId}"></td>
+			<td th:text="${o.quantityRequired}"></td>
+			<td th:text="${o.orderDateTime}"></td>
+		</tr>
+	</table>
+
+		</br></br>
+		<h4>User Search</h4>
+		<form action="#" th:action="@{findUserByEmailId}" method="get">
+			<label>Email ID</label>
+			<input type="text" th:value="${emailId}" name="findUserByEmailId"/></br>
+			<input type="submit" value="Search"/>
+		</form>
+		
+		<form action="#" th:action="@{admin}" method="get">
+			<input type="submit" value="View All Users"/>
+		</form>
+		
+	</br>
+		<span th:text="${userMessage}"></span>
+		<table border="1">
+			<tr>
+				<th>Email ID</th>
+				<th>Name</th>
+				<th>Admin?</th>
+				<th>Orders</th>
+			</tr>
+			<tr th:each="u:${users}">
+				<td th:text="${u.emailId}"></td>
+				<td th:text="${u.name}"></td>
+				<td th:text="${u.isAdmin}"></td>
+				<td th:text="${u.orders}"></td>
+			</tr>
+		</table>
+			
+</body>
+</html>
